@@ -27,20 +27,13 @@ export function ImageWithSkeleton({
 
   return (
     <>
-      <div
-        aria-hidden
-        className={cn(
-          "pointer-events-none absolute inset-0 overflow-hidden transition-opacity duration-700",
-          loaded ? "opacity-0" : "opacity-100",
-          skeletonClassName,
-        )}
-      >
-        {skeletonVariant === "portrait" ? <PortraitSkeleton /> : <CardSkeleton />}
-      </div>
-
       <NextImage
         {...imageProps}
-        className={className}
+        className={cn(
+          "transition-opacity duration-700",
+          loaded ? "opacity-100" : "opacity-0",
+          className,
+        )}
         onLoad={(event) => {
           const now =
             typeof performance !== "undefined" ? performance.now() : Date.now();
@@ -53,6 +46,17 @@ export function ImageWithSkeleton({
           onLoad?.(event);
         }}
       />
+
+      <div
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-0 z-10 overflow-hidden transition-opacity duration-700",
+          loaded ? "opacity-0" : "opacity-100",
+          skeletonClassName,
+        )}
+      >
+        {skeletonVariant === "portrait" ? <PortraitSkeleton /> : <CardSkeleton />}
+      </div>
     </>
   );
 }
