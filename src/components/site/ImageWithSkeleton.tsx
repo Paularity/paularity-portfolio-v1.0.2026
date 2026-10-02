@@ -1,8 +1,10 @@
 "use client";
 
 import NextImage, { type ImageProps } from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+
+const MIN_SKELETON_MS = 500;
 
 type Variant = "portrait" | "card";
 
@@ -19,6 +21,9 @@ export function ImageWithSkeleton({
   ...imageProps
 }: Props) {
   const [loaded, setLoaded] = useState(false);
+  const mountedAt = useRef<number>(
+    typeof performance !== "undefined" ? performance.now() : Date.now(),
+  );
 
   return (
     <>
@@ -37,7 +42,14 @@ export function ImageWithSkeleton({
         {...imageProps}
         className={className}
         onLoad={(event) => {
-          setLoaded(true);
+          const now =
+            typeof performance !== "undefined" ? performance.now() : Date.now();
+          const remaining = MIN_SKELETON_MS - (now - mountedAt.current);
+          if (remaining > 0) {
+            setTimeout(() => setLoaded(true), remaining);
+          } else {
+            setLoaded(true);
+          }
           onLoad?.(event);
         }}
       />
