@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { HERO, PHOTO_ROLES, PROFILE } from "@/lib/content";
 import { ArrowDown, Mail } from "lucide-react";
+import { ImageWithSkeleton } from "./ImageWithSkeleton";
 
 export function Hero() {
   return (
@@ -71,12 +71,13 @@ export function Hero() {
           <div className="pointer-events-none absolute inset-0 red-glow blur-[2px]" />
           <div className="pointer-events-none absolute inset-0 grid-overlay opacity-90 [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
           <div className="relative h-full w-full">
-            <Image
+            <ImageWithSkeleton
               src={PHOTO_ROLES.hero}
               alt={`${PROFILE.displayName} — portrait`}
               fill
               priority
               sizes="(min-width: 1024px) 720px, (min-width: 768px) 620px, 90vw"
+              skeletonVariant="portrait"
               className="object-contain object-bottom grayscale contrast-[1.05] [mix-blend-mode:luminosity] drop-shadow-[0_30px_80px_rgba(220,38,38,0.35)] [mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]"
             />
             <div className="pointer-events-none absolute inset-0 bg-red/[0.08] mix-blend-overlay" />

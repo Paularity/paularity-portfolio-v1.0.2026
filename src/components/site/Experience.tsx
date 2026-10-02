@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { EXPERIENCE, PHOTO_ROLES, PROFILE } from "@/lib/content";
 import { Section } from "./Section";
+import { ImageWithSkeleton } from "./ImageWithSkeleton";
 
 export function Experience() {
   return (
@@ -19,11 +19,12 @@ export function Experience() {
         <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-border-soft bg-card">
           <div className="pointer-events-none absolute inset-0 red-glow-soft" />
           <div className="pointer-events-none absolute inset-0 grid-overlay opacity-60" />
-          <Image
+          <ImageWithSkeleton
             src={PHOTO_ROLES.experience}
             alt={`${PROFILE.displayName} — professional portrait`}
             fill
             sizes="(min-width: 768px) 480px, 90vw"
+            skeletonVariant="card"
             className="object-cover object-top grayscale contrast-[1.05] brightness-95 [mix-blend-mode:luminosity]"
           />
           <div className="pointer-events-none absolute inset-0 bg-red/[0.10] mix-blend-overlay" />

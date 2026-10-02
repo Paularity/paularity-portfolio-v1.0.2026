@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { PHILOSOPHY, PHOTO_ROLES, PROFILE } from "@/lib/content";
 import { Section } from "./Section";
 import { Compass } from "lucide-react";
+import { ImageWithSkeleton } from "./ImageWithSkeleton";
 
 export function Philosophy() {
   return (
@@ -18,11 +18,12 @@ export function Philosophy() {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-[1.05fr_1fr] md:gap-8">
         <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-border-soft bg-card md:aspect-auto">
           <div className="pointer-events-none absolute inset-0 red-glow-soft" />
-          <Image
+          <ImageWithSkeleton
             src={PHOTO_ROLES.philosophy}
             alt={`${PROFILE.displayName} — at work`}
             fill
             sizes="(min-width: 768px) 560px, 100vw"
+            skeletonVariant="card"
             className="object-cover object-center grayscale contrast-[1.05] brightness-95 [mix-blend-mode:luminosity]"
           />
           <div className="pointer-events-none absolute inset-0 bg-red/[0.08] mix-blend-overlay" />
