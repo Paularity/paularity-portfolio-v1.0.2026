@@ -58,8 +58,12 @@ export function Footer() {
           </ul>
           <div>© {year} Christian Paul Decembrana. All rights reserved.</div>
           <div className="flex gap-4">
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
+            <Link href="/privacy" className="hover:text-fg">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-fg">
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>
